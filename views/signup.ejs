@@ -1,0 +1,124 @@
+<%- include("./partials/header.ejs"); %>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4" style="margin-top:5%">
+        <form action="/signup" method="post" enctype="multipart/form-data" id="add-user-form">
+          <div class="panel panel-default">
+            <div class="panel-header"><h2 class="text-center">Sign Up</h2></div>
+            <div class="panel-body">
+              <div class="form-group">
+                <label for="">Name</label>
+                <input type="text" class="form-control" name="name" />
+                <p class="error name-error"></p>
+              </div>
+              <div class="form-group">
+                <label for="">Email</label>
+                <input type="text" class="form-control" name="email" />
+                <p class="error email-error"></p>
+              </div>
+              <div class="form-group">
+                <label for="">Contact</label>
+                <input type="text" class="form-control" name="contact" />
+                <p class="error contact-error"></p>
+              </div>
+              <div class="form-group">
+                <label for="">Password</label>
+                <input type="password" class="form-control" name="password" />
+                <p class="error password-error"></p>
+              </div>
+              <div class="form-group">
+                <label for="">Photo</label>
+                <input type="file" class="form-control" name="photo" />
+                <p class="error photo-error"></p>
+                <p class="error common-error"></p>
+              </div>
+            </div>
+            <div class="panel-footer">
+              <input type="submit" value="Save">
+              <!-- <button class="btn btn-info">Sign up</button> -->
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- form submit scripts -->
+    <script>
+      const modal = document.querySelector("add-user-modal");
+      const form = document.querySelector("#add-user-form");
+
+      // success toast
+      const successToast = Toastify({
+        text: "Use was added successfully! Reloading the list...",
+        duration: 1000,
+      });
+
+      // function closeModal() {
+      //   modal.style.display = "none";
+      // }
+      // function openModal() {
+      //   modal.style.display = "block";
+      // }
+
+      // form submit handler
+      form.onsubmit = async function (event)
+      {
+        event.preventDefault();
+
+        // clean errors first
+        const errorPlaceholders = document.querySelectorAll("p.error");
+        for(let i = 0; i < errorPlaceholders.length; i++)
+        {
+          errorPlaceholders[i].style.dispaly = "none";
+        }
+
+        // remove input border errors
+        const inputErrors = document.querySelectorAll("input.error");
+        if(inputErrors.length > 0) {
+          for (let j = 0; j < inputErrors.length; j++)
+          {
+            inputErrors[j].classList.remove("error");
+          }
+        }
+        
+        // prepare the form data
+        const formData = new FormData(form);
+
+        //send the request
+        let response = await fetch("/signup", {
+          method: "POST",
+          body: formData,
+        });
+
+        // get response
+        let result = await response.json();
+
+        // handle error and response
+        if (result.errors) {
+          // errors
+          Object.keys(result.errors).forEach((fieldName) => {
+            // add error class to all inputs
+            form[fieldName].classList.add("error");
+            
+            // set all error placeholder (p tag) textContent
+            const errorPlaceholder = document.querySelector(`.${fieldName}-error`);
+            errorPlaceholder.textContent = result.errors[fieldName].msg;
+
+            // make all placeholder visible
+            errorPlaceholder.style.dispaly = "block";
+          });
+        } else {
+          // success
+          successToast.showToast();
+          // closeModal();
+          document.querySelector("p.error").style.dispaly = "none";
+
+          // reload the page after 1 second
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
+        }
+      };
+    </script>
+
+<%- include("./partials/footer.ejs"); %>

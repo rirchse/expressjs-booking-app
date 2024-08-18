@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const authRouter = require("./routers/authRouter");
+const pageRouter = require("./routers/pageRouter");
+const userRouter = require("./routers/userRouter");
 
 //internal imports
 const {notFoundHandler, errorHandler} = require("./middlewares/common/errorHandler");
@@ -41,8 +43,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // router setup
-app.use('/', authRouter);
+app.use("/", pageRouter);
+app.use("/", authRouter);
 // app.use('/dashboard', loginRouter);
+app.use("/", userRouter);
 
 // 404 not found handler
 app.use(notFoundHandler);

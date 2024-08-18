@@ -1,0 +1,25 @@
+<%- include("./partials/header.ejs"); %>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4" style="margin-top:5%">
+        <form action="">
+          <div class="panel panel-default">
+            <div class="panel-header"><h2 class="text-center">Sign In</h2></div>
+            <div class="panel-body">
+              <div class="form-group">
+                <label for="">Username</label>
+                <input type="text" class="form-control" name="username" />
+              </div>
+                <div class="form-group">
+                  <label for="">Password</label>
+                  <input type="password" class="form-control" name="password" />
+                </div>
+            </div>
+            <div class="panel-footer">
+              <button class="btn btn-info">Login</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+<%- include("./partials/footer.ejs"); %>
