@@ -10,7 +10,14 @@ async function userIndex(req, res, next)
 {
   try {
     const users = await User.find();
-    res.render("users", { users: users, });
+    if(res.locals.html)
+    {
+      res.render("users", { users: users, });
+    }
+    else
+    {
+      res.json({ users: users, });
+    }
   }
   catch (err) 
   {

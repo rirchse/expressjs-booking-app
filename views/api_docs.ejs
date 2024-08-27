@@ -1,9 +1,59 @@
 <%- include("./partials/header.ejs"); %>
     <div class="row">
       <div class="col-md-12" style="margin-top:5%">
-        <div class="panel panel-default">
+        <h1>API Documentation</h1>
+
+        <div class="panel panel-warning">
+          <div class="panel-heading">API Root URL:</div>
           <div class="panel-body">
-            <p class="text-center">API Documentation is under development</p>
+            <a href="#">https://expressjs-booking-app-il3j.onrender.com/</a>
+          </div>
+        </div>
+        <div class="panel panel-warning">
+          <div class="panel-heading">Sign up API:</div>
+          <div class="panel-body">
+            <p>
+              <a href="#">ROOT-URL/api/signup</a>
+            </p>
+            <p>{method: POST}</p>
+            <p>{name: required, Value: String}</p>
+            <p>{email: required, Value: Valid email address}</p>
+            <p>{contact: required, Value: Valid bangladeshi mobile number}</p>
+            <p>{password: required, Value: strong password format}</p>
+          </div>
+        </div>
+        <div class="panel panel-warning">
+          <div class="panel-heading">Login API:</div>
+          <div class="panel-body">
+            <p>
+              <a href="#">ROOT-URL/api/login</a>
+            </p>
+            <p>{method: POST}</p>
+            <p>{username: required, Value: Email or Mobile Number}</p>
+            <p>{password: required, Value: user provided password}</p>
+          </div>
+        </div>
+        <div class="panel panel-warning">
+          <div class="panel-heading">Get Users API:</div>
+          <div class="panel-body">
+            <p>
+              <a href="#">ROOT-URL/api/user</a>
+            </p>
+            <p>{method: GET}</p>
+            <p>{authentication: Yes}</p>
+            <p>{atuhorization: "admin"}</p>
+          </div>
+        </div>
+        <div class="panel panel-warning">
+          <div class="panel-heading">Delete Users API:</div>
+          <div class="panel-body">
+            <p>
+              <a href="#">ROOT-URL/api/user/{id}</a>
+            </p>
+            <p>{method: DELETE}</p>
+            <p>{authentication: Yes}</p>
+            <p>{atuhorization: "admin"}</p>
+            <p>{parameter: "user id"}</p>
           </div>
         </div>
       </div>

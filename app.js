@@ -12,7 +12,7 @@ const userRouter = require("./routers/userRouter");
 
 //api routers
 const apiAuthRouter = require("./routers/api/apiAuthRouter");
-// const apiUserRouter = require("./routers/api/apiUserRouter");
+const apiUserRouter = require("./routers/api/apiUserRouter");
 
 //internal imports
 const {notFoundHandler, errorHandler} = require("./middlewares/common/errorHandler");
@@ -65,7 +65,7 @@ app.use("/", userRouter);
 
 // api routes
 app.use("/api", apiAuthRouter);
-// app.use("/api", apiUserRouter);
+app.use("/api", apiUserRouter);
 
 // 404 not found handler
 app.use(notFoundHandler);
