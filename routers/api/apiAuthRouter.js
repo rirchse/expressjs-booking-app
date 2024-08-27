@@ -10,7 +10,7 @@ const { signupValidator, validationHandler} = require("../../middlewares/users/u
 const router = express.Router();
 
 //add user route by api request
-router.post("/add-user", signupValidator, validationHandler, addUser);
+router.post("/signup", signupValidator, validationHandler, addUser);
 
 // login route by api request
 router.post("/login", loginValidator, loginValidationHandler, apiLogin);
